@@ -1,32 +1,52 @@
 import java.util.ArrayList;
 
-class Location {
+
+public class Location {
     private int id;
     private String name;
-    private ArrayList<Integer> connections;
+    private ArrayList<Integer> locations;
     private boolean locked;
 
-    public Location(int id, String name, ArrayList<Integer> connections, boolean locked) {
+    public Location(int id, String name, ArrayList<Integer> locations, boolean locked) {
         this.id = id;
         this.name = name;
-        this.connections = connections;
+        this.locations = locations;
         this.locked = locked;
+    }
+
+    public Location() {
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
-    public ArrayList<Integer> getConnections() {
-        return connections;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Integer> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(ArrayList<Integer> locations) {
+        this.locations = locations;
     }
 
     public boolean isLocked() {
         return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 
     @Override
@@ -34,8 +54,6 @@ class Location {
         return "Location{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", connections=" + connections +
-                ", locked=" + locked +
                 '}';
     }
 }
