@@ -1,0 +1,7 @@
+1,Klíč,3,2,true
+2,Byliny,3,0,true
+3,Pochodeň,5,3,true
+4,Lektvar,5,7,true
+5,Srdce Draka,7,0,true
+6,Páka,4,4,false
+7,Starobylá kniha,6,0,true

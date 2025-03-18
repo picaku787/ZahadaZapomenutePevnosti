@@ -1,7 +1,7 @@
-public class Napoveda implements  Command {
+public class Napoveda implements Command {
     @Override
     public String execute() {
-        return "";
+        return "Nápověda: Prozkoumávej místnosti a sbírej předměty, abys vyřešil hádanky pevnosti.";
     }
 
     @Override

@@ -1,12 +1,21 @@
 import java.util.ArrayList;
 
-public class Inventar implements  Command {
+public class Inventar implements Command {
+    public ArrayList<Item> items = new ArrayList<>();
 
-    private int size;
-    private  ArrayList<Item> items=new ArrayList<>();
     @Override
     public String execute() {
-        return "";
+        if (items.isEmpty()) {
+            return "Inventář je prázdný.";
+        }
+        String result = "Obsah inventáře: ";
+        for (int i = 0; i < items.size(); i++) {
+            result += items.get(i).getName();
+            if (i < items.size() - 1) {
+                result += ", ";
+            }
+        }
+        return result;
     }
 
     @Override
@@ -14,19 +23,13 @@ public class Inventar implements  Command {
         return false;
     }
 
-    public int getSize() {
-        return size;
+    public void addItem(Item item) {
+        if (item.isCanTake()) {
+            items.add(item);
+        }
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
+    public void removeItem(Item item) {
+        items.remove(item);
     }
 }

@@ -1,0 +1,2 @@
+Tajemný mnich,1,7,0
+Alchymista,5,2,4

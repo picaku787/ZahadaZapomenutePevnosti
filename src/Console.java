@@ -1,15 +1,29 @@
-import java.util.HashMap;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class Console {
     private boolean exit = false;
     private HashMap<String, Command> commands = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
     private Map map = new Map();
+    private Loader loader = new Loader();
+    private Inventar inventar = new Inventar();
 
     public void initialization() {
+        loader.loadItems("items.txt");
+        loader.loadCharacters("characters.txt");
+        map.loadMap();
+
         commands.put("jdi", new Jdi(map));
         commands.put("konec", new Konec(this));
+        commands.put("vezmi", new Vezmi(inventar, loader.getItems(), map));
+        commands.put("poloz", new Poloz(inventar));
+        commands.put("pouzij", new Pouzij(inventar, loader.getItems(), map.getPosition()));
+        commands.put("mluv", new Mluv(loader.getCharacters(), map.getPosition()));
+        commands.put("prozkoumej", new Prozkoumej(map, loader.getItems(), loader.getCharacters()));
+        commands.put("inventar", inventar);
+        commands.put("pomoc", new Pomoc(commands));
+        commands.put("napoveda", new Napoveda());
     }
 
     public void run() {
@@ -30,7 +44,6 @@ public class Console {
 
     public void start() {
         initialization();
-        map.loadMap();
         try {
             do {
                 run();
