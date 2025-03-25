@@ -5,8 +5,8 @@ public class Pouzij implements Command {
     private Inventar inventar;
     private HashMap<Integer, Item> items;
     private Map map;
-    private boolean leverUsed = false; // Přidána proměnná pro sledování použití Páky
-    private boolean potionUsed = false; // Přidána proměnná pro sledování použití Lektvaru
+    private boolean leverUsed = false;
+    private boolean potionUsed = false;
 
     public Pouzij(Inventar inventar, HashMap<Integer, Item> items, Map map) {
         this.inventar = inventar;
@@ -36,19 +36,19 @@ public class Pouzij implements Command {
                 case "pochodeň":
                     if (map.getMap().containsKey(3)) {
                         map.getMap().get(3).setLocked(false);
-                        return "Použil jsi Pochodeň a místnost 3 je nyní odemčena!";
+                        return "Použil jsi "+item.getName()+" a místnost 3 je nyní odemčena!";
                     }
                     break;
                 case "páka":
                     leverUsed = true;
-                    return "Použil jsi Páku. Nyní musíš ještě použít Klíč k odemčení místnosti 7.";
+                    return "Použil jsi "+item.getName()+ ". Nyní musíš ještě použít Klíč k odemčení místnosti 7.";
                 case "lektvar":
                     potionUsed = true;
-                    return "Použil jsi Lektvar. Nyní musíš ještě použít Klíč k odemčení místnosti 7.";
+                    return "Použil jsi "+item.getName()+ ". Nyní musíš ještě použít Klíč k odemčení místnosti 7.";
                 case "klíč":
                     if (map.getMap().containsKey(7) && leverUsed && potionUsed) {
                         map.getMap().get(7).setLocked(false);
-                        return "Použil jsi Klíč a protože jsi již použil Páku a Lektvar, místnost 7 je nyní odemčena!";
+                        return "Použil jsi "+ item.getName() +" a protože jsi již použil Páku a Lektvar, místnost 7 je nyní odemčena!";
                     }
                     return "Nejdříve musíš použít Páku a Lektvar, než můžeš odemknout místnost 7 Klíčem.";
                 default:
