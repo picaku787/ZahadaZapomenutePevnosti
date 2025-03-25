@@ -14,11 +14,11 @@ public class Console {
         loader.loadCharacters("characters.txt");
         map.loadMap();
 
-        commands.put("jdi", new Jdi(map));
+        commands.put("jdi", new Jdi(map,inventar));
         commands.put("konec", new Konec(this));
         commands.put("vezmi", new Vezmi(inventar, loader.getItems(), map));
         commands.put("poloz", new Poloz(inventar));
-        commands.put("pouzij", new Pouzij(inventar, loader.getItems(), map.getPosition()));
+        commands.put("pouzij", new Pouzij(inventar, loader.getItems(), map));
         commands.put("mluv", new Mluv(loader.getCharacters(), map.getPosition()));
         commands.put("prozkoumej", new Prozkoumej(map, loader.getItems(), loader.getCharacters()));
         commands.put("inventar", inventar);

@@ -5,4 +5,4 @@
 5,laborator,2,false
 6,knihovna,2,false
 7,hrobka_draka,8,true
-8,vychod,false
+8,vychod,7,false

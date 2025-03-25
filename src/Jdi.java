@@ -5,9 +5,11 @@ public class Jdi implements Command {
     private Map map;
     private Location currentLocation = new Location();
     private Location targetLocation = new Location();
+    private Inventar inventar;
 
-    public Jdi(Map map) {
+    public Jdi(Map map, Inventar inventar) {
         this.map = map;
+        this.inventar = inventar;
     }
 
     @Override
@@ -34,6 +36,17 @@ public class Jdi implements Command {
 
             if (currentLocation.getLocations().contains(targetID)) {
                 map.setPosition(targetID);
+
+                if (targetID == 8) {
+                    for (Item item : inventar.items) {
+                        if (item.getName().equalsIgnoreCase("Srdce Draka")) {
+                            System.out.println("Vyhrál jsi! Hra končí...");
+                            System.exit(0);
+                        }
+                    }
+                    return "Nemůžeš zde vyhrát, chybí ti předmět 'Srdce Draka'.";
+                }
+
                 return "Přesunuto na " + targetLocation.getName();
             } else {
                 return "Tam se nemůžete přesunout.";
