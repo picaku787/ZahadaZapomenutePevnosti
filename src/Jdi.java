@@ -1,5 +1,11 @@
+
 import java.util.Scanner;
 
+/**
+ * Třída pro pohyb hráče mezi místnostmi.
+ *
+ * @autor Dominik Svoboda
+ */
 public class Jdi implements Command {
     private Scanner sc = new Scanner(System.in);
     private Map map;
@@ -7,11 +13,22 @@ public class Jdi implements Command {
     private Location targetLocation = new Location();
     private Inventar inventar;
 
+    /**
+     * Konstruktor pro příkaz "Jdi", který nastavuje mapu a inventář.
+     *
+     * @param map Mapa, která definuje herní prostředí
+     * @param inventar Inventář hráče
+     */
     public Jdi(Map map, Inventar inventar) {
         this.map = map;
         this.inventar = inventar;
     }
 
+    /**
+     * Provádí příkaz pro pohyb hráče mezi místnostmi.
+     *
+     * @return Výsledek pohybu
+     */
     @Override
     public String execute() {
         int currentID = map.getPosition();

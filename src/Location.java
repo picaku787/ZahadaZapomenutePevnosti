@@ -1,12 +1,27 @@
 import java.util.ArrayList;
 
-
+/**
+ * Třída pro reprezentaci lokace ve hře .
+ *
+ * Tato třída obsahuje informace o lokaci, jako je její ID, název, seznam připojených lokalit
+ * a zda je tato lokace zamčená.
+ *
+ * @autor Dominik Svoboda
+ */
 public class Location {
     private int id;
     private String name;
     private ArrayList<Integer> locations;
     private boolean locked;
 
+    /**
+     * Konstruktor pro vytvoření lokace.
+     *
+     * @param id ID lokace
+     * @param name Název lokace
+     * @param locations Seznam dalších lokalit, které jsou připojené k této lokaci
+     * @param locked Určuje, zda je lokace zamčená
+     */
     public Location(int id, String name, ArrayList<Integer> locations, boolean locked) {
         this.id = id;
         this.name = name;

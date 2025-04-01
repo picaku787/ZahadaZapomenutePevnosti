@@ -1,6 +1,13 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
+
+/**
+ * Třída pro příkaz "Použít" ve hře.
+ * Tento příkaz umožňuje hráči použít předměty z inventáře v závislosti na jejich umístění a aktuálních podmínkách.
+ *
+ * @autor Dominik Svoboda
+ */
 public class Pouzij implements Command {
     private Inventar inventar;
     private HashMap<Integer, Item> items;
@@ -13,7 +20,12 @@ public class Pouzij implements Command {
         this.items = items;
         this.map = map;
     }
-
+    /**
+     * Provede akci příkazu "Použít".
+     * Umožňuje hráči použít předmět, pokud je v jeho inventáři a je ve správné lokaci.
+     *
+     * @return Textová zpráva, která informuje hráče o použití předmětu a jeho účincích.
+     */
     @Override
     public String execute() {
         Scanner sc = new Scanner(System.in);

@@ -1,17 +1,29 @@
-
+/**
+ * Třída reprezentující herní konzoli, která spravuje interakce s uživatelem.
+ *
+ * @autor Dominik Svoboda
+ */
 import java.util.*;
 
+/**
+ * Třída reprezentující herní konzoli, která spravuje interakce s uživatelem.
+ *
+ * @autor Dominik Svoboda
+ */
 public class Console {
     private boolean exit = false;
-    private HashMap<String, Command> commands = new HashMap<>();
+    public HashMap<String, Command> commands = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
     private Map map = new Map();
     private Loader loader = new Loader();
     private Inventar inventar = new Inventar();
 
+    /**
+     * Inicializace herní konzole, načtení itemů, postav a mapy.
+     */
     public void initialization() {
-        loader.loadItems("items.txt");
-        loader.loadCharacters("characters.txt");
+        loader.loadItems();
+        loader.loadCharacters();
         map.loadMap();
 
         commands.put("jdi", new Jdi(map,inventar));
@@ -19,13 +31,15 @@ public class Console {
         commands.put("vezmi", new Vezmi(inventar, loader.getItems(), map));
         commands.put("poloz", new Poloz(inventar));
         commands.put("pouzij", new Pouzij(inventar, loader.getItems(), map));
-        commands.put("mluv", new Mluv(loader.getCharacters(), map.getPosition()));
+        commands.put("mluv", new Mluv(loader.getCharacters(),map));
         commands.put("prozkoumej", new Prozkoumej(map, loader.getItems(), loader.getCharacters()));
         commands.put("inventar", inventar);
         commands.put("pomoc", new Pomoc(commands));
         commands.put("napoveda", new Napoveda());
     }
-
+    /**
+     * Provádí zpracování a vykonání příkazu na základě uživatelského vstupu.
+     */
     public void run() {
         System.out.print(">> ");
         String input = sc.next().toLowerCase().trim();
@@ -41,7 +55,9 @@ public class Console {
             System.out.println(">> Neznámý příkaz");
         }
     }
-
+    /**
+     * Spustí hlavní smyčku hry.
+     */
     public void start() {
         initialization();
         try {

@@ -3,13 +3,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Třída pro správu mapy ve hře.
+ *
+ * Tato třída umožňuje načítat data o lokacích z textového souboru, sledovat aktuální pozici
+ * hráče a poskytovat informace o dostupných lokacích.
+ *
+ * @autor Dominik Svoboda
+ */
 public class Map {
     private HashMap<Integer, Location> map = new HashMap<>();
     private int startingPosition = 1;
     private int currentPosition = startingPosition;
 
-    public boolean loadMap() {
+    /**
+     * Načítá mapu z textového souboru a vytváří objekty typu Location.
+     *
+     * Soubor "mista.txt" by měl obsahovat data v následujícím formátu:
+     * ID_lokace,Název_lokace,Seznam_ID_dostupných_propojených_lokalit,Stav_zamčení_lokace
+     */
+    public void loadMap() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("mista.txt"))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -26,7 +39,6 @@ public class Map {
                 Location location = new Location(locationId, locationName, availableLocations, isLocked);
                 map.put(locationId, location);
             }
-            return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

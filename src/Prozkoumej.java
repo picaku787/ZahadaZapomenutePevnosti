@@ -1,6 +1,11 @@
 import java.util.HashMap;
 import java.util.Scanner;
-
+/**
+ * Třída pro příkaz "Prozkoumej" ve hře.
+ * Tento příkaz umožňuje hráči prozkoumávat místnosti a předměty v aktuálním místě.
+ *
+ * @autor Dominik Svoboda
+ */
 public class Prozkoumej implements Command {
     private Map map;
     private HashMap<Integer, Item> items;
@@ -12,6 +17,14 @@ public class Prozkoumej implements Command {
         this.characters = characters;
     }
 
+    /**
+     * Provede akci příkazu "Prozkoumej".
+     * Umožňuje hráči prozkoumat místnost nebo předměty v aktuálním místě.
+     * Pokud hráč zvolí "místnost", zobrazí se informace o předmětech a postavách v místnosti.
+     * Pokud hráč zadá název předmětu, získá informace o jeho umístění.
+     *
+     * @return Textová zpráva o prozkoumané místnosti nebo předmětu.
+     */
     @Override
     public String execute() {
         Scanner sc = new Scanner(System.in);
