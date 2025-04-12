@@ -11,25 +11,26 @@ import java.util.Scanner;
 public class Mluv implements Command {
     private HashMap<String, Character> characters;
     private Map map;
+    private Inventar inventar;
+    private HashMap<Integer, Item> items;
+    private Pouzij pouzij;
 
-    /**
-     * Konstruktor třídy Mluv.
-     *
-     * @param characters Mapa všech postav ve hře.
-     * @param map Mapa, která obsahuje aktuální pozici hráče.
-     */
-    public Mluv(HashMap<String, Character> characters, Map map) {
+
+    public Mluv(HashMap<String, Character> characters, Map map, Inventar inventar, HashMap<Integer, Item> items,Pouzij pouzij) {
         this.characters = characters;
         this.map = map;
+        this.inventar = inventar;
+        this.items = items;
+        this.pouzij = pouzij;
     }
 
     /**
-     * Metoda pro provedení příkazu mluvit.
+     * Provede příkaz "mluvit" – pokusí se navázat rozhovor s postavou.
      *
-     * Umožňuje hráči zadat jméno postavy, se kterou chce mluvit, a ověřuje,
-     * zda je postava v aktuální lokaci hráče.
+     * Ověří, jestli se zadaná postava nachází v aktuální lokaci hráče
+     * a provede interakci.
      *
-     * @return Textová zpráva, která popisuje výsledek pokusu o mluvení s postavou.
+     * @return Výsledek pokusu o rozhovor s postavou.
      */
     @Override
     public String execute() {
@@ -42,7 +43,12 @@ public class Mluv implements Command {
             int currentLocation = map.getPosition();
 
             if (character.getLocation() == currentLocation) {
-                return "Mluvíš s " + character.getName() + ".";
+                boolean result = character.interactWithPlayer(inventar, items, pouzij);
+                if (result) {
+                    return "Interakce proběhla úspěšně.";
+                } else {
+                    return"Postava chce: "+character.getWantedItem();
+                }
             } else {
                 return "Tato postava zde není.";
             }
@@ -55,3 +61,4 @@ public class Mluv implements Command {
         return false;
     }
 }
+

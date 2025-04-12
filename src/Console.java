@@ -17,7 +17,6 @@ public class Console {
     private Map map = new Map();
     private Loader loader = new Loader();
     private Inventar inventar = new Inventar();
-
     /**
      * Inicializace herní konzole, načtení itemů, postav a mapy.
      */
@@ -30,8 +29,9 @@ public class Console {
         commands.put("konec", new Konec(this));
         commands.put("vezmi", new Vezmi(inventar, loader.getItems(), map));
         commands.put("poloz", new Poloz(inventar));
-        commands.put("pouzij", new Pouzij(inventar, loader.getItems(), map));
-        commands.put("mluv", new Mluv(loader.getCharacters(),map));
+        Pouzij pouzij = new Pouzij(inventar, loader.getItems(), map);
+        commands.put("pouzij", pouzij);
+        commands.put("mluv", new Mluv(loader.getCharacters(), map, inventar, loader.getItems(),pouzij));
         commands.put("prozkoumej", new Prozkoumej(map, loader.getItems(), loader.getCharacters()));
         commands.put("inventar", inventar);
         commands.put("pomoc", new Pomoc(commands));

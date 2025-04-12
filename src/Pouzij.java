@@ -14,12 +14,14 @@ public class Pouzij implements Command {
     private Map map;
     private boolean leverUsed = false;
     private boolean potionUsed = false;
+    private boolean mnichSatisfied = false;
 
     public Pouzij(Inventar inventar, HashMap<Integer, Item> items, Map map) {
         this.inventar = inventar;
         this.items = items;
         this.map = map;
     }
+
     /**
      * Provede akci příkazu "Použít".
      * Umožňuje hráči použít předmět, pokud je v jeho inventáři a je ve správné lokaci.
@@ -58,11 +60,13 @@ public class Pouzij implements Command {
                     potionUsed = true;
                     return "Použil jsi "+item.getName()+ ". Nyní musíš ještě použít Klíč k odemčení místnosti 7.";
                 case "klíč":
-                    if (map.getMap().containsKey(7) && leverUsed && potionUsed) {
+                    if (map.getMap().containsKey(7) && leverUsed && potionUsed && mnichSatisfied) {
                         map.getMap().get(7).setLocked(false);
-                        return "Použil jsi "+ item.getName() +" a protože jsi již použil Páku a Lektvar, místnost 7 je nyní odemčena!";
+                        return "Použil jsi " + item.getName() + " a protože jsi již použil Páku, Lektvar a uspokojil Tajemného mnicha, místnost 7 je nyní odemčena!";
                     }
-                    return "Nejdříve musíš použít Páku a Lektvar, než můžeš odemknout místnost 7 Klíčem.";
+                    else{
+                        inventar.addItem(item);
+                    return "Ještě musíš použít Páku, Lektvar a uspokojit Tajemného mnicha, než můžeš odemknout místnost 7 Klíčem.";}
                 default:
                     return "Použil jsi " + item.getName() + ".";
             }
@@ -73,5 +77,13 @@ public class Pouzij implements Command {
     @Override
     public boolean exit() {
         return false;
+    }
+
+    public boolean isMnichSatisfied() {
+        return mnichSatisfied;
+    }
+
+    public void setMnichSatisfied(boolean mnichSatisfied) {
+        this.mnichSatisfied = mnichSatisfied;
     }
 }

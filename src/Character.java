@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Třída představující postavu ve hře.
  *
@@ -23,8 +26,38 @@ public class Character {
         this.givenItem = givenItem;
     }
 
+    /**
+     * Provede interakci hráče s postavou.
+     *
+     * Pokud má hráč požadovaný předmět, odebere ho a případně přidá nový.
+     *
+     * @return true, pokud interakce proběhla úspěšně, jinak false.
+     */
+    public boolean interactWithPlayer(Inventar inventar, HashMap<Integer, Item> items ,Pouzij pouzij) {
+        for (Item item : new ArrayList<>(inventar.items)) {
+            if (item.getId() == wantedItem) {
+                inventar.removeItem(item);
+
+
+                if (name.equalsIgnoreCase("Tajemný mnich")) {
+                    pouzij.setMnichSatisfied(true);
+                    System.out.println("Tajemný mnich přijal předmět a vypadá spokojeně. Udělal jsi další krok k odemčení místnosti 7.");
+                }
+
+
+                if (givenItem != 0 && items.containsKey(givenItem)) {
+                    Item newItem = items.get(givenItem);
+                    inventar.addItem(newItem);
+                    System.out.println("Vyměnil jsi " + item.getName() + " za " + newItem.getName() + ".");
+                }
+
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getName() { return name; }
     public int getLocation() { return location; }
     public int getWantedItem() { return wantedItem; }
-    public int getGivenItem() { return givenItem; }
 }
