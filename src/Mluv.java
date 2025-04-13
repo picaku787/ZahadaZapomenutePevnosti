@@ -16,7 +16,7 @@ public class Mluv implements Command {
     private Pouzij pouzij;
 
 
-    public Mluv(HashMap<String, Character> characters, Map map, Inventar inventar, HashMap<Integer, Item> items,Pouzij pouzij) {
+    public Mluv(HashMap<String, Character> characters, Map map, Inventar inventar, HashMap<Integer, Item> items, Pouzij pouzij) {
         this.characters = characters;
         this.map = map;
         this.inventar = inventar;
@@ -26,7 +26,7 @@ public class Mluv implements Command {
 
     /**
      * Provede příkaz "mluvit" – pokusí se navázat rozhovor s postavou.
-     *
+     * <p>
      * Ověří, jestli se zadaná postava nachází v aktuální lokaci hráče
      * a provede interakci.
      *
@@ -47,18 +47,21 @@ public class Mluv implements Command {
                 if (result) {
                     return "Interakce proběhla úspěšně.";
                 } else {
-                    return"Postava chce: "+character.getWantedItem();
+                    int wantedItemId = character.getWantedItem();
+                    if (items.containsKey(wantedItemId)) {
+                        String itemName = items.get(wantedItemId).getName();
+                        return "Postava chce: " + itemName;
+                    }}
+                } else{
+                    return "Tato postava zde není.";
                 }
-            } else {
-                return "Tato postava zde není.";
             }
+            return "Tuto postavu neznáš.";
         }
-        return "Tuto postavu neznáš.";
-    }
 
-    @Override
-    public boolean exit() {
-        return false;
+        @Override
+        public boolean exit () {
+            return false;
+        }
     }
-}
 
